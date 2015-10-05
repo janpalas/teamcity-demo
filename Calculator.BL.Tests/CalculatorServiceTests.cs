@@ -8,29 +8,33 @@ namespace Calculator.BL.Tests
     [TestFixture]
     public class CalculatorServiceTests
     {
-        private ICalculatorService _calculatorService;
-
-        [SetUp]
-        public void SetUp()
+        [Test]
+        public void Run_Test()
         {
             var mathematicsMock = new Mock<IMathematics>();
             mathematicsMock.Setup(m => m.Add(It.IsAny<int>(), It.IsAny<int>())).Returns(100);
             mathematicsMock.Setup(m => m.Subtract(It.IsAny<int>(), It.IsAny<int>())).Returns(1);
 
-            _calculatorService = new CalculatorService(mathematicsMock.Object);
+            var userInterfaceMock = new Mock<IUserInterface>();
+            userInterfaceMock.Setup(c => c.ReadModel()).Returns(new MathematicModel { First = 5, Second = 2 });
+            userInterfaceMock.Setup(c => c.WriteResult(100)).Verifiable("Output of add operation should be written to the ui");
+
+            var calculatorService = new CalculatorService(mathematicsMock.Object, userInterfaceMock.Object);
+
+            calculatorService.Run();
+
+            userInterfaceMock.VerifyAll();
         }
 
         [Test]
-        public void Calculate_Test()
+        public void Run_NotSupportedOperation_Test()
         {
-            var model = new MathematicModel { First = 5, Second = 2, Operation = Operations.Add };
-            Assert.That(_calculatorService.Calculate(model) == 100);
+            var userInterfaceMock = new Mock<IUserInterface>();
+            userInterfaceMock.Setup(c => c.ReadModel()).Returns(new MathematicModel { First = 5, Second = 2, Operation = (Operations)3});
 
-            model.Operation = Operations.Subtract;
-            Assert.That(_calculatorService.Calculate(model) == 1);
+            var calculatorService = new CalculatorService(new Mock<IMathematics>().Object, userInterfaceMock.Object);
 
-            model.Operation = (Operations)3;
-            Assert.Throws<NotSupportedException>(() => _calculatorService.Calculate(model));
+            Assert.Throws<NotSupportedException>(() => calculatorService.Run());
         }
     }
 }

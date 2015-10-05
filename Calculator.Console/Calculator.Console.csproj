@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A1A69538-C433-49F3-80E3-33D4D8FC0F9F}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{4DE28CEE-5676-46D0-8247-5C4BFE1EB482}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Calculator.BL</RootNamespace>
-    <AssemblyName>Calculator.BL</AssemblyName>
+    <RootNamespace>Calculator.Console</RootNamespace>
+    <AssemblyName>Calculator.Console</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,14 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalculatorService.cs" />
-    <Compile Include="IMathematics.cs" />
-    <Compile Include="IUserInterface.cs" />
-    <Compile Include="Mathematics.cs" />
-    <Compile Include="Operations.cs" />
-    <Compile Include="ICalculatorService.cs" />
-    <Compile Include="MathematicModel.cs" />
+    <Compile Include="ConsoleUserInterface.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Calculator.BL\Calculator.BL.csproj">
+      <Project>{a1a69538-c433-49f3-80e3-33d4d8fc0f9f}</Project>
+      <Name>Calculator.BL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

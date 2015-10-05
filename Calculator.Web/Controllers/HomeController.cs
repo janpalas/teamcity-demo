@@ -1,18 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using Calculator.BL;
 
 namespace Calculator.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IMathematics _mathematics;
+
+        public HomeController()
+        {
+            _mathematics = new Mathematics();
+        }
+
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
+            return View(new MathematicModel());
+        }
 
-            return View();
+        public ActionResult Calculate(MathematicModel input)
+        {
+            var ui = new Models.Calculator(_mathematics, input);
+            return View(ui.Calculate());
         }
     }
 }

@@ -2,6 +2,6 @@
 {
     public interface ICalculatorService
     {
-        int Calculate(MathematicModel model);
+        void Run();
     }
 }

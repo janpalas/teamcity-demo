@@ -109,6 +109,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Calculator.BL\Calculator.BL.csproj">
+      <Project>{A1A69538-C433-49F3-80E3-33D4D8FC0F9F}</Project>
+      <Name>Calculator.BL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Calculator.Web\Calculator.Web.csproj">
       <Project>{610FAC67-36F6-4C80-A7AE-34117AD8D90E}</Project>
       <Name>Calculator.Web</Name>
