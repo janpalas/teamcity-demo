@@ -1,14 +1,13 @@
 ﻿using System.Web.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Calculator.Web;
 using Calculator.Web.Controllers;
+using NUnit.Framework;
 
 namespace Calculator.Web.Tests.Controllers
 {
-    [TestClass]
+    [TestFixture]
     public class HomeControllerTest
     {
-        [TestMethod]
+        [Test]
         public void Index()
         {
             // Arrange
