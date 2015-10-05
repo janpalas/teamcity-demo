@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Calculator.BL;
+﻿using Calculator.BL;
 
 namespace Calculator.Web.Models
 {

@@ -4,21 +4,23 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Calculator.BL;
 
 namespace Calculator.Web.Controllers
 {
     public class ValuesController : ApiController
     {
-        // GET api/values
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        private readonly IMathematics _mathematics;
 
-        // GET api/values/5
-        public string Get(int id)
+        public ValuesController()
         {
-            return "value";
+            _mathematics = new Mathematics();
+        }
+        // GET api/values
+        public int Get([FromUri]MathematicModel input)
+        {
+            var ui = new Models.Calculator(_mathematics, input);
+            return ui.Calculate();
         }
 
         // POST api/values
